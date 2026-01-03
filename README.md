@@ -1,91 +1,30 @@
-# sudoku-java
+# Jogo de Sudoku
 
-Jogo de Sudoku em Java
+Escreva um código que irá criar um jogo de sudoku
 
-## Descrição
+https://pt.wikipedia.org/wiki/Sudoku
 
-Este projeto é um jogo de Sudoku desenvolvido em Java, com interface gráfica utilizando JavaFX. O usuário pode jogar partidas em diferentes níveis de dificuldade, desfazer jogadas, resetar a partida e gerar novos desafios. Além disso, há um modo de design para criar e salvar novos tabuleiros personalizados.
+  ## Requisitos
+    Deve-se ter um menu interativo onde poderemos escolher entre as seguintes opções:
+        1. Iniciar um novo o jogo: Deve-se exibir na tela o jogo inicial, com os espaços preenchidos somente pelos números iniciais (usar os args do método main para informar os números iniciais e suas devidas posiçõers);
 
-## Funcionalidades
+        2. Colocar um novo número: Deve-se solicitar as seguintes informações do jogador (número a ser colocado, indice horizontal e indice vertical do número), não se deve permitir que seja colocado um número em uma posição que já esteja preenchida ( seja número fixo ou informado pelo jogador);
 
-- Seleção de níveis de dificuldade (fácil, médio, difícil)
-- Geração de novas partidas com tabuleiros aleatórios
-- Desfazer o último palpite
-- Resetar a partida (remover todos os palpites)
-- Interface gráfica intuitiva com JavaFX
-- **Modo Design**: Permite ao usuário criar um novo tabuleiro do zero, informando os valores iniciais e suas posições. O usuário pode escolher a dificuldade, que define a quantidade mínima de valores preenchidos. Ao finalizar, é possível salvar o tabuleiro criado em um arquivo JSON.
+        3. Remover um número: deve-se solicitar os índices verticais e horizontais do número que deseja remover ( caso o número seja um número fixo do jogo deve-se exibir uma mensagem informado que o número não pode ser removido);
 
-## Como funciona
+        4. Verificar jogo: Vizualizar a situação atual do jogo;
 
-Os valores iniciais do tabuleiro são carregados a partir de um arquivo JSON, que contém uma lista de objetos "partida". Cada objeto possui:
-- `dificuldade`: string indicando o nível (ex: "fácil", "médio", "difícil")
-- `tabuleiro`: matriz 9x9 de inteiros, onde casas vazias são representadas por zero
+        5. Verificar status do jogo: Deve-se verificar o status atual do jogo ( não iniciado, incompleto e completo) e se contém ou não erros ( o jogo está errado quando tem números em posições conflitantes) todos os status do jogo podem conter ou não erros, exceto o status não iniciado que é sempre sem erro;
+        6. Limpar: remove todos os números informados pelo usuário e mantém os fixos do jogo;
 
-No modo design, todos os campos do tabuleiro são zerados e o usuário pode preencher os valores iniciais conforme a dificuldade selecionada (por padrão, dificuldade média). Após finalizar, basta clicar em salvar para gravar o novo tabuleiro no JSON.
+        7. finalizar o jogo: Se o jogo estiver com todos os espaços preenchidos de forma válida o jogo é encerrado, senão informar ao usuário que ele deve preencher todos os espaços com seus respectivos números;
 
-## Requisitos
+  ## Extras (requisitos opcionais)
+    1. Usar algum ambiente gráfico ( AWT, Swing) para criação do jogo
+    2. ter a opção de colocar números de rascunho nos quadrados, para isso deve-se seguir o modelo proposto na sessão modelo de rascunho:
 
-- Java 11 ou superior
-- JavaFX
-- (Opcional) IDE como IntelliJ IDEA ou Eclipse
+  ### modelo com números
+  ![Sudoku](../images/sudoku.jpg)
 
-## Como executar
-
-1. Clone este repositório:
-   ```bash
-   git clone https://github.com/laisbastosbg/sudoku-java.git
-   ```
-2. Importe o projeto na sua IDE ou compile via terminal.
-3. Certifique-se de que o JavaFX está configurado corretamente.
-4. Execute a classe principal do projeto.
-
-## Estrutura do Projeto
-
-```md
-sudoku-java/
-├── .gitignore
-├── pom.xml
-├── README.md
-└── src/
-    ├── main/
-    │   ├── java/
-    │   │   └── com/lais/sudoku/
-    │   │       ├── MainApplication.java
-    │   │       │
-    │   │       ├── model/             # Lógica de negócio e regras do jogo
-    │   │       │   ├── Tabuleiro.java
-    │   │       │   ├── Dificuldade.java   (Enum para fácil, médio, difícil)
-    │   │       │   └── ResolvedorSudoku.java
-    │   │       │
-    │   │       ├── ui/                  # Classes relacionadas à interface (View e Controller)
-    │   │       │   ├── GameController.java
-    │   │       │   └── DesignController.java
-    │   │       │
-    │   │       └── persistence/       # Classes para leitura e escrita de dados
-    │   │           ├── GerenciadorDePartidas.java
-    │   │           └── PartidaDTO.java     # Classe para mapear o objeto JSON
-    │   │
-    │   └── resources/
-    │       ├── com/lais/sudoku/ui/
-    │       │   ├── game-view.fxml
-    │       │   └── design-view.fxml
-    │       │
-    │       └── data/
-    │           └── partidas.json      # O arquivo JSON com os tabuleiros
-    │
-    └── test/
-        ├── java/
-        │   └── com/lais/sudoku/
-        │       ├── model/
-        │       │   └── TabuleiroTest.java
-        │       └── persistence/
-        │           └── GerenciadorDePartidasTest.java
-        │
-        └── resources/
-            └── data/
-                └── partidas_teste.json # Um JSON específico para os testes
-```
-
-## Licença
-
-Este projeto está licenciado sob a licença MIT.
+  ### modelo de rascunho
+  ![rascunho](../images/draft.gif)
